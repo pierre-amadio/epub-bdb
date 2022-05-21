@@ -4,6 +4,7 @@ import sys
 import re
 from bs4 import BeautifulSoup
 from jinja2 import Template,FileSystemLoader,Environment
+from entry import *
 
 file_loader = FileSystemLoader("templates")
 env = Environment(loader=file_loader)
@@ -20,16 +21,11 @@ print(xmlDic)
 with open(xmlDic) as fp:
   soup=BeautifulSoup(fp, 'lxml')
 
-for node in soup.find_all("part"):
-  print("##################################")
-  print(node["id"],node["title"])
-  for entry in node.find_all("entry"):
-    cnt=0
-    word=entry.find("w")
-    print("cnt=%s"%word)
-    if(len(entry.find_all("w"))!=1):
-      print("LEN=",len(entry.find_all("w")))
-    else:
-      print(entry)
 
-
+for curpart in soup.find_all("part"):
+  print("part",curpart['id'])
+  for cursect in curpart.find_all("section",recursive=False):
+    print("  sect",cursect["id"])
+    for curentry in cursect.find_all("entry",recursive=False):
+      print("    entry",curentry["id"])
+      a=entry(curentry)
