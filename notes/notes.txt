@@ -1,0 +1,9 @@
+#1) Clone the openscriptures's Hebrew lexicon:
+
+git clone git@github.com:openscriptures/HebrewLexicon.git
+
+2)
+
+export OSHLDIR=/home/melmoth/dev/HebrewLexicon/
+
+
