@@ -2,29 +2,38 @@
 import copy
 
 class entry:
-  myid=None
-  mytype=None
-  mydef=[]
-  mysense=[]
-  mysoup=None
-  mypos=None
-  myasp=None
-  rawsoup=None
-
   def __init__(self, soupEntry):
+    myid=None
+    mylabel=None
+    mytype=None
+    mydef=[]
+    mysense=[]
+    mysoup=None
+    mypos=None
+    myasp=None
+    rawsoup=None
+
     rawsoup=copy.copy(soupEntry)
     myid=rawsoup["id"]
-    print("my id",myid)
-    print("--")
-    print(rawsoup.contents)
-    print("@@@@")
-    print(str(rawsoup))
+    #print("--",myid)
+    #print("my def=",mydef)
+    #print(rawsoup.contents)
+    #print("@@@@")
+    #print(str(rawsoup))
     
     if "type" in rawsoup.attrs:
-      mytype=rawsoup["type"]
+      self.mytype=rawsoup["type"]
     
     for adef in rawsoup.find_all("def",recursive=False):
-      print(adef)
+      mydef.append(adef.contents)
 
+    cnt=0
     for curword in rawsoup.find_all("w",recursive=False):
-      print(curword)
+      if(cnt==0):
+        mylabel=curword.contents
+      cnt+=1
+
+    if(cnt==0):
+        print("Why is there no W for", myid)
+        sys.exit()
+    
