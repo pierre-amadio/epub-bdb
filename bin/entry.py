@@ -31,7 +31,6 @@ class entry:
     for curword in self.mysoup.find_all("w",recursive=False):
       if(cnt==0):
         self.mylabel=curword.string
-        print("self mylabel",self.mylabel)
       cnt+=1
 
     if(cnt==0):

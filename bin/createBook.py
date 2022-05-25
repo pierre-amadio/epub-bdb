@@ -23,14 +23,20 @@ with open(xmlDic) as fp:
   soup=BeautifulSoup(fp, 'lxml')
 
 
-todo={}
+data=[]
 
 for curpart in soup.find_all("part"):
-  print("part",curpart['id'])
+  part={}
+  part["id"]=curpart['id']
+  part["title"]=curpart["title"]
+  part["entries"]=[]
   for cursect in curpart.find_all("section",recursive=False):
-    print("  sect",cursect["id"])
-    for curentry in cursect.find_all("entry",recursive=False):
-      a=entry(curentry)
-      """pdb.run('mymodule.test()')"""
-      print(a.mylabel)
-      print(a.mydef)
+    """ print("  sect",cursect["id"]) """
+    for tmpent in cursect.find_all("entry",recursive=False):
+      part["entries"].append(entry(tmpent))
+  data.append(part)
+
+for p in data:
+  print("#####PART %s #####"%p["title"])
+  for ent in p["entries"]:
+    print(ent)
