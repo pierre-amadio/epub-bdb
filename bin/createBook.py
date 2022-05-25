@@ -17,7 +17,6 @@ xmlDic="%s/BrownDriverBriggs.xml"%OSHLDIR
 #xmlDic="/home/melmoth/dev/html/index.html"
 #xmlDic="./test.xml"
 #xmlDic="/home/melmoth/dev/LXX/xml1/01-Gen.xml"
-print(xmlDic)
 
 with open(xmlDic) as fp:
   soup=BeautifulSoup(fp, 'lxml')
@@ -39,4 +38,6 @@ for curpart in soup.find_all("part"):
 for p in data:
   print("#####PART %s #####"%p["title"])
   for ent in p["entries"]:
-    print(ent)
+    print("__")
+    print(ent.mylabel)
+    print(ent.mydef)

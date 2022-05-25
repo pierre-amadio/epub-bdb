@@ -25,7 +25,7 @@ class entry:
       self.mytype=self.mysoup["type"]
     
     for adef in self.mysoup.find_all("def",recursive=False):
-      self.mydef.append(adef.contents)
+      self.mydef.append(adef.string)
 
     cnt=0
     for curword in self.mysoup.find_all("w",recursive=False):
