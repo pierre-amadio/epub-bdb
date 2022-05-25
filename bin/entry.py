@@ -3,34 +3,35 @@ import copy
 
 class entry:
   def __init__(self, soupEntry):
-    myid=None
-    mylabel=None
-    mytype=None
-    mydef=[]
-    mysense=[]
-    mysoup=None
-    mypos=None
-    myasp=None
-    rawsoup=None
+    self.myid=None
+    self.mylabel=None
+    self.mytype=None
+    self.mydef=[]
+    self.mysense=[]
+    self.mysoup=None
+    self.mypos=None
+    self.myasp=None
+    self.rawsoup=None
 
-    rawsoup=copy.copy(soupEntry)
-    myid=rawsoup["id"]
+    self.mysoup=copy.copy(soupEntry)
+    self.myid=self.mysoup["id"]
     #print("--",myid)
     #print("my def=",mydef)
     #print(rawsoup.contents)
     #print("@@@@")
     #print(str(rawsoup))
     
-    if "type" in rawsoup.attrs:
-      self.mytype=rawsoup["type"]
+    if "type" in self.mysoup.attrs:
+      self.mytype=self.mysoup["type"]
     
-    for adef in rawsoup.find_all("def",recursive=False):
-      mydef.append(adef.contents)
+    for adef in self.mysoup.find_all("def",recursive=False):
+      self.mydef.append(adef.contents)
 
     cnt=0
-    for curword in rawsoup.find_all("w",recursive=False):
+    for curword in self.mysoup.find_all("w",recursive=False):
       if(cnt==0):
-        mylabel=curword.contents
+        self.mylabel=curword.string
+        print("self mylabel",self.mylabel)
       cnt+=1
 
     if(cnt==0):
