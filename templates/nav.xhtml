@@ -1,0 +1,18 @@
+    <ol>
+    {% for part in books -%}
+      {% if part.myitems|length -%}
+       <li>
+	      <a href="{{part.file}}">{{part.mylabel}}</a>
+	       <ol>
+	       {% for myitem in part.myitems -%}
+	       <li><a href="{{part.file}}#{{myitem.startid}}">{{myitem.startlabel}} to {{myitem.endlabel}}</a></li>
+	       {% endfor -%}
+	       </ol>
+       </li>
+       {% else -%}
+       <li>
+	      <a href="{{part.file}}">{{part.mylabel}}</a>
+       </li>
+      {% endif -%}
+    {% endfor -%}
+    </ol>
