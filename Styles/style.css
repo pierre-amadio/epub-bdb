@@ -6,14 +6,19 @@ body {
 
 
 .mylabel {
-  color: green ;
-  float: right;
+  color: black ;
   font-weight:normal;
+  float:left;
 }
 
 .myoutput {
   font-weight:normal;
   float:left;
   color: black;
+
+}
+
+.entry {
+ line-height: 1px;
 }
 
