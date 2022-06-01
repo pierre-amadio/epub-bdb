@@ -54,7 +54,7 @@ for curpart in soup.find_all("part"):
         toccuritem={}
         toccuritem["startid"]=newentry.myid
         toccuritem["startlabel"]=newentry.mylabel
-      if tocitemcnt==10:
+      if tocitemcnt==50:
         toccuritem["endlabel"]=newentry.mylabel
         tocpart["myitems"].append(toccuritem)
         tocitemcnt=-1
@@ -84,15 +84,6 @@ for p in data:
   fileOutput="%s/%s.xhtml"%(outputDir,p["id"])
   with open(fileOutput,"w") as f:
     f.write(partOutput)
-
-for p in toc:
-    print("mylable",p["mylabel"])
-    print('len item',len(p["myitems"]))
-    print("file",p["file"])
-    print(p["myitems"])
-    if(len(p["myitems"])==0):
-        print("COIN")
-        print(p)
 
 tocTemplate=env.get_template("TOC.xhtml")
 tocOutput=tocTemplate.render(book=toc)
