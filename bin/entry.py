@@ -52,8 +52,15 @@ class entry:
     """
     """ may be there is a reference to another word"""
     for curword in self.mysoup.find_all("w",recursive=False):
-      if curword.has_attr("mod") and curword.has_attr("src"):
+      if curword.has_attr("src"):
         if not self.myoutput:
           self.myoutput="see "
         self.myoutput+="<a href=\"#%s\">%s</a>"%(curword["src"],curword.string)
+
+    """ still nothing...."""
+    if not self.myoutput:
+      self.myoutput=""
+      for c in self.mysoup.stripped_strings:
+        self.myoutput+=c
+
 
