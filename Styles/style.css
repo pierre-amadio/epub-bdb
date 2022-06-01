@@ -3,3 +3,17 @@ body {
   color: black;
   column-count: 1;
 }
+
+
+.mylabel {
+  color: green ;
+  float: right;
+  font-weight:normal;
+}
+
+.myoutput {
+  font-weight:normal;
+  float:left;
+  color: black;
+}
+

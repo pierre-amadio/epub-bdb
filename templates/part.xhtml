@@ -11,8 +11,8 @@
 <H2>{{part.title}}</H2>
  {% for entry in part.entries -%}
  <p id="{{entry.myid}}">
- {{entry.mylabel}}
- {{entry.myoutput}}
+ <span class="mylabel">{{entry.mylabel}}</span>
+ <span class="myoutput">{{entry.myoutput}}</span>
  </p>
  {% endfor -%}
 </div>
