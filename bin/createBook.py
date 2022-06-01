@@ -29,23 +29,53 @@ with open(xmlDic) as fp:
 
 
 data=[]
+toc=[]
 
 for curpart in soup.find_all("part"):
   part={}
+  tocpart={}
+  
   part["id"]=curpart['id']
   part["title"]=curpart["title"]
   part["entries"]=[]
+
+  tocpart["mylabel"]=curpart["title"]
+  tocpart["file"]="Files/%s.xhtml"%curpart["id"]
+  tocpart["myitems"]=[]
+  tocitemcnt=0
+  toccuritem={}
+
   for cursect in curpart.find_all("section",recursive=False):
     """ print("  sect",cursect["id"]) """
     for tmpent in cursect.find_all("entry",recursive=False):
-      part["entries"].append(entry(tmpent))
+      newentry=entry(tmpent)
+      part["entries"].append(newentry)
+      if tocitemcnt==0:
+        toccuritem={}
+        toccuritem["startid"]=newentry.myid
+        toccuritem["startlabel"]=newentry.mylabel
+      if tocitemcnt==10:
+        toccuritem["endlabel"]=newentry.mylabel
+        tocpart["myitems"].append(toccuritem)
+        tocitemcnt=-1
+      tocitemcnt+=1
+        
   data.append(part)
+  if not tocpart["myitems"]:
+      """
+      vav vav vav...
+      emptyitem={}
+      emptyitem["startid"]=""
+      emptyitem["startlabel"]=""
+      emptyitem["endlabel"]=""
+      tocpart["myitems"].append(emptyitem)
+      """
+      tocpart["myitems"]=[]
+  else:
+      toc.append(tocpart)
 
 for p in data:
-  print("#####PART %s #####"%p["title"])
   for ent in p["entries"]:
-    print("__")
-    print(ent.mylabel)
     if(not ent.myoutput):
       print(ent.mysoup)
 
@@ -55,4 +85,19 @@ for p in data:
   with open(fileOutput,"w") as f:
     f.write(partOutput)
 
+for p in toc:
+    print("mylable",p["mylabel"])
+    print('len item',len(p["myitems"]))
+    print("file",p["file"])
+    print(p["myitems"])
+    if(len(p["myitems"])==0):
+        print("COIN")
+        print(p)
 
+tocTemplate=env.get_template("TOC.xhtml")
+tocOutput=tocTemplate.render(book=toc)
+
+
+fileOutput="%s/TOC.xhtml"%outputDir
+with open(fileOutput,"w") as f:
+    f.write(tocOutput)
