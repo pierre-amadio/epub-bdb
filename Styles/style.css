@@ -6,19 +6,19 @@ body {
 
 
 .mylabel {
+  text-align: left;
   color: black ;
-  font-weight:normal;
-  float:left;
+  font-weight:bold;
 }
 
 .myoutput {
+  text-align: left;
   font-weight:normal;
-  float:left;
   color: black;
 
 }
 
 .entry {
- line-height: 1px;
+  margin: 0;
 }
 

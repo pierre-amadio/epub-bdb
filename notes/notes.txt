@@ -19,3 +19,12 @@ cp templates/Foreword.html output/01Foreword.xhtml
 #Add the title in the content.opf
 #save as bdb.kepub.epub
 
+#Reopening the book with koreader is extremely slow.
+#This can be workarounded with:
+#https://github.com/koreader/koreader/pull/3700
+
+"""
+So, the first thing to do, when noticing a bug AND any of the below warnings, is to increase the cache sizes until no more warnings are logged, and see if the bug is still there.
+
+To increase the cache size, add to your settings.reader.lua: "cre_storage_size_factor" = 4, (or more, or less)
+"""
