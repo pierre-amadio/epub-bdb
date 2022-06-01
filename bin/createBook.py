@@ -87,8 +87,12 @@ for p in data:
 
 tocTemplate=env.get_template("TOC.xhtml")
 tocOutput=tocTemplate.render(book=toc)
-
-
 fileOutput="%s/TOC.xhtml"%outputDir
 with open(fileOutput,"w") as f:
     f.write(tocOutput)
+
+navTemplate=env.get_template("nav.xhtml")
+navOutput=navTemplate.render(toc=toc)
+fileOutput="nav.txt"
+with open(fileOutput,"w") as f:
+    f.write(navOutput)

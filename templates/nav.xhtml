@@ -1,5 +1,5 @@
     <ol>
-    {% for part in books -%}
+    {% for part in toc -%}
       {% if part.myitems|length -%}
        <li>
 	      <a href="{{part.file}}">{{part.mylabel}}</a>
