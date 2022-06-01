@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import copy
+import re
 
 class entry:
   def __init__(self, soupEntry):
@@ -55,7 +56,13 @@ class entry:
       if curword.has_attr("src"):
         if not self.myoutput:
           self.myoutput="see "
-        self.myoutput+="<a href=\"#%s\">%s</a>"%(curword["src"],curword.string)
+
+        m=re.match("^(\w+)\.",curword["src"])
+        if not m:
+            print("Cannot parse",curword["src"])
+            sys.exit()
+
+        self.myoutput+="<a href=\"%s.xhtml#%s\">%s</a>"%(m.group(1),curword["src"],curword.string)
 
     """ still nothing...."""
     if not self.myoutput:
