@@ -40,7 +40,7 @@ for curpart in soup.find_all("part"):
   part["entries"]=[]
 
   tocpart["mylabel"]=curpart["title"]
-  tocpart["file"]="Files/%s.xhtml"%curpart["id"]
+  tocpart["file"]="%s.xhtml"%curpart["id"]
   tocpart["myitems"]=[]
   tocitemcnt=0
   toccuritem={}
@@ -87,7 +87,7 @@ for p in data:
 
 tocTemplate=env.get_template("TOC.xhtml")
 tocOutput=tocTemplate.render(book=toc)
-fileOutput="%s/TOC.xhtml"%outputDir
+fileOutput="%s/02TOC.xhtml"%outputDir
 with open(fileOutput,"w") as f:
     f.write(tocOutput)
 

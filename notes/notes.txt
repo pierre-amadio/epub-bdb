@@ -2,9 +2,20 @@
 
 git clone git@github.com:openscriptures/HebrewLexicon.git
 
-2)
+#2) Create the content:
 
 export OSHLDIR=/home/melmoth/dev/HebrewLexicon/
 
+rm -rf output; mkdir output
 ./bin/createBook.py $OSHLDIR output/
+
+cp templates/Foreword.html output/01Foreword.html
+
+#3 start sigil , create a v3 book
+#Add all the html file in the Text directory.
+#Delete the section1 file
+#Add a title to the nav's title node
+#Add the content of the nav.txt file in the navs's table of content
+#Add the title in the content.opf
+#save as bdb.kepub.epub
 
