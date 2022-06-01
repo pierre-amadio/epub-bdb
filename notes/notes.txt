@@ -9,7 +9,7 @@ export OSHLDIR=/home/melmoth/dev/HebrewLexicon/
 rm -rf output; mkdir output
 ./bin/createBook.py $OSHLDIR output/
 
-cp templates/Foreword.html output/01Foreword.html
+cp templates/Foreword.html output/01Foreword.xhtml
 
 #3 start sigil , create a v3 book
 #Add all the html file in the Text directory.
