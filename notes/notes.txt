@@ -6,4 +6,5 @@ git clone git@github.com:openscriptures/HebrewLexicon.git
 
 export OSHLDIR=/home/melmoth/dev/HebrewLexicon/
 
+./bin/createBook.py $OSHLDIR output/
 

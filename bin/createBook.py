@@ -7,6 +7,12 @@ from bs4 import BeautifulSoup
 from jinja2 import Template,FileSystemLoader,Environment
 from entry import *
 
+def escapeall(s):
+  import htmlentitydefs
+  for k, v in htmlentitydefs.items():
+    s = string.replace(s, v, '&' + k)
+  return s
+
 file_loader = FileSystemLoader("templates")
 env = Environment(loader=file_loader)
 
@@ -30,7 +36,7 @@ for curpart in soup.find_all("part"):
   part["title"]=curpart["title"]
   part["entries"]=[]
   for cursect in curpart.find_all("section",recursive=False):
-    """ print("  sect",cursect["id"]) """
+    print("  sect",cursect["id"]) 
     for tmpent in cursect.find_all("entry",recursive=False):
       part["entries"].append(entry(tmpent))
   data.append(part)
@@ -41,3 +47,15 @@ for p in data:
     print("__")
     print(ent.mylabel)
     print(ent.mydef)
+    """
+    if(len(ent.mydef)==0):
+      print(ent.mysoup)
+    """
+
+  partTemplate=env.get_template("part.xhtml")
+  partOutput=partTemplate.render(part=p)
+  fileOutput="%s/%s.xhtml"%(outputDir,p["id"])
+  with open(fileOutput,"w") as f:
+    f.write(partOutput)
+
+
