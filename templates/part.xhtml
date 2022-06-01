@@ -10,9 +10,10 @@
 <div> 
 <H2>{{part.title}}</H2>
  {% for entry in part.entries -%}
- <br>
+ <p id="{{entry.myid}}">
  {{entry.mylabel}}
- {{entry.mydef}}
+ {{entry.myoutput}}
+ </p>
  {% endfor -%}
 </div>
 </body>

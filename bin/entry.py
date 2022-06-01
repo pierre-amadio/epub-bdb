@@ -12,6 +12,7 @@ class entry:
     self.mypos=None
     self.myasp=None
     self.rawsoup=None
+    self.myoutput=None
 
     self.mysoup=copy.copy(soupEntry)
     self.myid=self.mysoup["id"]
@@ -37,3 +38,22 @@ class entry:
         print("Why is there no W for", myid)
         sys.exit()
     
+    if len(self.mydef):
+      """
+        there are some def nodes, just using thoses.
+      """
+      self.myoutput=""
+      for d in self.mydef:
+        self.myoutput+="%s, "%d
+      return 
+
+    """
+      no def nodes, so, what to put ?
+    """
+    """ may be there is a reference to another word"""
+    for curword in self.mysoup.find_all("w",recursive=False):
+      if curword.has_attr("mod") and curword.has_attr("src"):
+        if not self.myoutput:
+          self.myoutput="see "
+        self.myoutput+="<a href=\"#%s\">%s</a>"%(curword["src"],curword.string)
+
