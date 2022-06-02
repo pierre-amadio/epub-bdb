@@ -1,4 +1,8 @@
 body {
+
+  direction: ltr;
+  unicode-bidi: bidi-override;
+  text-align: left;
   text-justify: none;
   color: black;
   column-count: 1;
@@ -6,19 +10,18 @@ body {
 
 
 .mylabel {
-  text-align: left;
   color: black ;
   font-weight:bold;
 }
 
 .myoutput {
-  text-align: left;
-  font-weight:normal;
   color: black;
+  font-weight:normal;
 
 }
 
 .entry {
   margin: 0;
 }
+
 
